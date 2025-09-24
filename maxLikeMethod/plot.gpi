@@ -1,0 +1,34 @@
+set terminal svg
+set output "ExponentialDecayData.svg"
+
+set title "Decay data with Exponential Fits"
+
+set xlabel "x"
+set ylabel "Probability Density"
+
+set tics out
+set xzeroaxis
+set yzeroaxis
+
+set style data histogram
+set style fill transparent solid 0.5 noborder
+
+# This command calculates stats and sets STATS_min and STATS_max
+stats "decay.data" using 1 nooutput
+
+# Use the stats output to set a dynamic xrange
+#set xrange [STATS_min:STATS_max]
+
+# The `bin` function maps each data point to the left edge of its bin
+binwidth=5
+bin(x,width)=width*floor(x/width)+width/2.0
+
+# Set boxwidth to match the binwidth for constant width boxes
+set boxwidth binwidth
+set style histogram gap 1
+
+# Plot the data using the bin function, with frequencies automatically calculated, then normalized
+plot 'decay.data' using (bin($1,binwidth)):(1.0/(STATS_records * binwidth)) smooth freq with boxes,\
+	"decayFunc.txt" with lines,\
+ 	"decayFuncFloc.txt" with lines,\
+	'decayTau.txt' with lines

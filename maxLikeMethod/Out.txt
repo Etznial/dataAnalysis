@@ -1,0 +1,4 @@
+expo fit        tau =5.7780000000000005
+expo fit floc0  tau =6.758
+expo fit mle    (tau, err) =(6.758, np.float64(42.74134485483581))
+expo fit square (array([3.09938637]), array([[1074589.60687863]]))

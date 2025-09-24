@@ -1,0 +1,29 @@
+set terminal svg
+set output "McExponentialDecayData.svg"
+
+set title "mcDecay data"
+
+set xlabel "x"
+set ylabel "counts"
+
+set xrange [0:40]
+
+set tics out
+set xzeroaxis
+set yzeroaxis
+
+set style data histogram
+set style fill transparent solid 0.5 noborder
+
+# The `bin` function maps each data point to the left edge of its bin
+binwidth=1
+bin(x,width)=width*floor(x/width)
+
+# Set boxwidth to match the binwidth for constant width boxes
+set boxwidth binwidth
+set style histogram gap 1
+
+# Plot the data using the bin function, with frequencies automatically calculated
+plot 'mcDecay.data' using (bin($1,binwidth)) smooth freq with boxes
+
+
