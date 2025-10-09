@@ -1,0 +1,25 @@
+set terminal svg
+set output "Plot.svg"
+
+set title "N/A"
+
+set xlabel "x"
+set ylabel "y"
+
+set tics out
+set xzeroaxis
+set yzeroaxis
+
+set key left top
+
+set xrange [0:7]
+d(x)=0.01941586*x**3-0.14819278*x**2+0.57482483*x+0.55906557
+f(x)=0.05176505*x**2-0.01335461*x+1.01059771
+g(x)=0.30992616*x+0.63900698
+h(x)=1.46216923
+# Plot the data using the bin function, with frequencies automatically calculated, then normalized
+plot 'data.data' using 1:2:3 with errorbars\
+,d(x)\
+,f(x)\
+,g(x)\
+,h(x)
