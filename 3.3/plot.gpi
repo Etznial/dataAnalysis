@@ -1,0 +1,23 @@
+set terminal svg
+set output "Plot.svg"
+
+set title "N/A"
+
+set xlabel "x"
+set ylabel "y"
+
+set tics out
+set xzeroaxis
+set yzeroaxis
+
+set key left top
+
+# getting more plots in local host
+set multiplot layout 2,2
+
+#set xrange [0:20]
+
+# Plot the data using the bin function, with frequencies automatically calculated, then normalized
+plot 'data.txt' using ($1-0.5):2 with boxes notitle
+plot 'data.txt' using ($1-0.5):3 with boxes notitle
+plot 'data.txt' using ($1-0.5):4 with boxes notitle
