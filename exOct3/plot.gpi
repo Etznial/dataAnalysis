@@ -1,0 +1,24 @@
+set terminal svg
+set output "Plot.svg"
+
+set title "N/A"
+
+set xlabel "x"
+set ylabel "y"
+
+set tics out
+set xzeroaxis
+set yzeroaxis
+
+set key left top
+
+# funcs
+a=76
+b=0.22
+normExpo(x)=a*(1-exp(-2*b))*exp(-b*x)
+
+set xrange [0:20]
+
+# Plot the data using the bin function, with frequencies automatically calculated, then normalized
+plot 'data.data' using ($1+1):2 with boxes\
+,normExpo(x)
