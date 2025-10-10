@@ -16,8 +16,17 @@ set key left top
 set multiplot layout 2,2
 
 #set xrange [0:20]
-
+set yrange [0:40]
 # Plot the data using the bin function, with frequencies automatically calculated, then normalized
+set title 'observed 1'
+set xlabel 'bins'
+set ylabel 'n'
 plot 'data.txt' using ($1-0.5):2 with boxes notitle
+set title 'observed 2'
+set xlabel 'bins'
+set ylabel 'n'
 plot 'data.txt' using ($1-0.5):3 with boxes notitle
+set title 'expected'
+set xlabel 'bins'
+set ylabel 'n'
 plot 'data.txt' using ($1-0.5):4 with boxes notitle
