@@ -14,8 +14,10 @@ def chi2P(func,*params,xs,ys): # chi squared for Poisson distributed data
 	xsys = zip(xs,ys)
 	for x,y in xsys:
 		vi = func(x,*params)
-		res += y*np.log(y/vi)+vi-y	
+		res += y*np.log(y/vi)+vi-y	# be aware that we can divide by zero, maybe do a catch case for this?
 	return res
+
+
 
 if __name__ == "__main__":
 	
