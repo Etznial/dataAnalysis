@@ -1,0 +1,45 @@
+set terminal svg
+set output "Plot.svg"
+
+set title "N/A"
+
+set xlabel "x"
+set ylabel "y"
+
+set tics out
+set xzeroaxis
+set yzeroaxis
+
+set key left top
+
+# getting more plots in local host
+# set multiplot layout 2,2
+A1 =  9.97e3
+B1 =  33.83e-3
+Person(x) = A1*(1-exp(-B1*5.46))*exp(-B1*x)
+
+A2 =  8.00e3
+B2 =  29.59e-3
+Neyman(x) = A2*(1-exp(-B2*5.46))*exp(-B2*x)
+
+A3 = 10.00e3
+B3 = 33.30e-3
+BACK3 = -1.41
+PersonBack(x) = A3*(1-exp(-B3*5.46))*exp(-B3*x)+BACK3
+
+A4 = 8.32e3
+B4 = 27.14e-3
+BACK4 = -8.6
+NeymanBack(x) = A4*(1-exp(-B4*5.46))*exp(-B4*x)+BACK4
+
+set xrange [0:205]
+#set yrange [0:40]
+# Plot the data using the bin function, with frequencies automatically calculated, then normalized
+set title 'observed 1'
+set xlabel 'bins'
+set ylabel 'n'
+plot 'ne17.txt' skip 5 using 1:2 with boxes notitle\
+,Person(x)\
+,Neyman(x)\
+,PersonBack(x)\
+,NeymanBack(x)\
